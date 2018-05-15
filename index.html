@@ -11,10 +11,12 @@ OAuth.popup(provider)
         console.log('Lastname: ', response.lastname);
     })
     .fail(function (err) {
+        console.log(err);
         //handle error with err
     });
 })
 .fail(function (err) {
+    console.log(err);
     //handle error with err
 });
 </script>
