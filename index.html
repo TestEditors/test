@@ -1,1 +1,20 @@
-hello?
+<script src='https://cdnjs.cloudflare.com/ajax/libs/oauth-io/0.6.2/oauth.min.js'></script>
+<script>
+OAuth.initialize('8b842e2ddc4a64d18bd1');
+var provider = 'github';
+
+OAuth.popup(provider)
+.done(function(result) {
+    result.me()
+    .done(function (response) {
+        console.log('Firstname: ', response.firstname);
+        console.log('Lastname: ', response.lastname);
+    })
+    .fail(function (err) {
+        //handle error with err
+    });
+})
+.fail(function (err) {
+    //handle error with err
+});
+</script>
