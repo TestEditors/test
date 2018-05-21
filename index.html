@@ -84,16 +84,12 @@ body, html {
 
     function newPage() {
         var activeEditor = tinyMCE.get('ocr-text');
-        console.log(123);
-        console.log(activeEditor);
-        var content = 'HTML or plain text content here...';
-        var xhr= new XMLHttpRequest();
+        var xhr = new XMLHttpRequest();
         var page = $('#page').val();
         xhr.open('GET', 'htmls/' + page + '.html', true);
         xhr.onreadystatechange= function() {
             if (this.readyState!==4) return;
-            if (this.status!==200) return; // or whatever error handling you want
-            //document.getElementById('ocr-text').innerHTML= this.responseText;
+            if (this.status!==200) return;
             activeEditor.setContent(this.responseText);
         };
         xhr.send();
