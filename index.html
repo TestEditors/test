@@ -69,7 +69,8 @@ body, html {
     .fail(function (err) {
         console.error(err);
     });
-    function save() {
+
+    function saveme() {
         if (repo) {
             var page = $('#page').val();
             var content = tinyMCE.activeEditor.getContent({ format: "raw" });
@@ -102,7 +103,7 @@ body, html {
         <label> Changing the page will reset edits!</label>
         <br/>
         <input onclick='responsiveVoice.speak(tinyMCE.activeEditor.getContent({ format: "text" }));' type='button' value='Read out loud' />
-        <input onclick='save' id='save' type='button' value='Save' />
+        <input onclick='saveme' id='save' type='button' value='Save' />
         <textarea class='my-mce-container' id='ocr-text'>
         </textarea>
     </div>
