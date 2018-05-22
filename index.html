@@ -84,6 +84,7 @@ body, html {
         if (repo) {
             var page = $('#page').val();
             var content = tinyMCE.activeEditor.getContent({ format: "raw" });
+            console.log(content);
             repo.writeFile('master', 'htmls/' + page + '.html', content, 'Save via editor interface', {}, function(error, result, request){
                 console.log('done with the commit');
                 console.log(error);
