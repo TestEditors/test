@@ -44,7 +44,7 @@ body, html {
 <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/oauth-io/0.6.2/oauth.min.js'></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/github-api/dist/GitHub.bundle.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 <body>
     <div class="row">
@@ -63,37 +63,49 @@ body, html {
     </div>
 </body>
 <script>
-/*
     OAuth.initialize('VnRodo6ycABEgsuWx0LF7BBgO-I');
     var provider = 'github';
+    var repo = null;
 
     OAuth.popup(provider)
     .done(function(result) {
-        result.me()
-        .done(function (response) {
-            console.log(response);
-        })
-        .fail(function (err) {
-            console.error(err);
+        console.log(result.access_token);
+        var gh = new GitHub({
+            token: result.access_token;
         });
+        repo = gh.getRepo('tguinard', 'test');
+        save();
     })
     .fail(function (err) {
         console.error(err);
     });
-*/
+    function save() {
+        if (repo) {
+            repo.writeFile('master', 'hello.txt', 'saluton mondon', 'trying to use github api 2', {});
+        }
+    }
+//repo.getContents('master', 'hello.txt', false, function(error, result, request){console.log(atob(result.content));});
 
     function newPage() {
         var activeEditor = tinyMCE.get('ocr-text');
         var xhr = new XMLHttpRequest();
         var page = $('#page').val();
+        document.getElementById('book-image').src = ('pngs/' + page + '.png');
         xhr.open('GET', 'htmls/' + page + '.html', true);
         xhr.onreadystatechange= function() {
-            if (this.readyState!==4) return;
-            if (this.status!==200) return;
-            activeEditor.setContent(this.responseText);
+            var content = '';
+            if (this.readyState!==4) {
+                content = 'Error loading data: ready state is not 4';
+            }
+            else if (this.status!==200) {
+                content = 'Error loading data: http status is not 200';
+            }
+            else {
+                content = this.responseText;
+            }
+            activeEditor.setContent(content);
         };
         xhr.send();
-        document.getElementById('book-image').src = ('pngs/' + page + '.png');
     }
 
     tinymce.init({ 
