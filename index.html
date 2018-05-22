@@ -71,7 +71,7 @@ body, html {
     .done(function(result) {
         console.log(result.access_token);
         var gh = new GitHub({
-            token: result.access_token;
+            token: result.access_token
         });
         repo = gh.getRepo('tguinard', 'test');
         save();
