@@ -82,7 +82,7 @@ body, html {
         var page = $('#page').val();
         document.getElementById('book-image').src = ('pngs/' + page + '.png');
         repo.getContents('master', 'htmls/' + page + '.html', true, function(error, result, request){
-            var content = atob(result.content);
+            var content = (result.content);
             activeEditor.setContent(content);
         });
     }
