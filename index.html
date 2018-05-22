@@ -85,7 +85,7 @@ body, html {
     }
 
     function newPage() {
-        var activeEditor = tinyMCE.get('ocr-text');
+        var activeEditor = tinyMCE.activeEditor;
         var page = $('#page').val();
         document.getElementById('book-image').src = ('pngs/' + page + '.png');
         repo.getContents('master', 'htmls/' + page + '.html', true, function(error, result, request){
