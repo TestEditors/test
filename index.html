@@ -58,6 +58,14 @@ body, html {
             token: result.access_token
         });
         repo = gh.getRepo('tguinard', 'test');
+        tinymce.init({ 
+            selector:'textarea', 
+            plugins: "autoresize",
+            init_instance_callback: function() {
+                $('#page').change(newPage);
+                newPage();
+            }
+        });
     })
     .fail(function (err) {
         console.error(err);
@@ -75,7 +83,6 @@ body, html {
             });
         }
     }
-    $('#save').click(save);
 
     function newPage() {
         var activeEditor = tinyMCE.get('ocr-text');
@@ -87,14 +94,6 @@ body, html {
         });
     }
 
-    tinymce.init({ 
-        selector:'textarea', 
-        plugins: "autoresize",
-        init_instance_callback: function() {
-            $('#page').change(newPage);
-            newPage();
-        }
-    });
 </script>
 <body>
     <div class="row">
