@@ -63,7 +63,6 @@ body, html {
             plugins: "autoresize",
             init_instance_callback: function() {
                 $('#page').change(newPage);
-                newPage();
             }
         });
     })
@@ -85,11 +84,11 @@ body, html {
     }
 
     function newPage() {
-        var activeEditor = tinyMCE.activeEditor;
         var page = $('#page').val();
         document.getElementById('book-image').src = ('pngs/' + page + '.png');
         repo.getContents('master', 'htmls/' + page + '.html', true, function(error, result, request){
             var content = (result.content);
+            var activeEditor = tinyMCE.activeEditor;
             activeEditor.setContent(content);
         });
     }
