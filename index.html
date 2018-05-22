@@ -54,6 +54,7 @@ body, html {
         <label> Changing the page will reset edits!</label>
         <br/>
         <input onclick='responsiveVoice.speak(tinyMCE.activeEditor.getContent({ format: "text" }));' type='button' value='Read out loud' />
+        <input onclick='save' type='button' value='Save' />
         <textarea class='my-mce-container' id='ocr-text'>
         </textarea>
     </div>
@@ -81,10 +82,16 @@ body, html {
     });
     function save() {
         if (repo) {
-            repo.writeFile('master', 'hello.txt', 'saluton mondon', 'trying to use github api 2', {});
+            var page = $('#page').val();
+            var content = tinyMCE.activeEditor.getContent({ format: "raw" });
+            repo.writeFile('master', 'htmls/' + page + '.html', content, 'Save via editor interface', {}, function(error, result, request){
+                console.log('done with the commit');
+                console.log(error);
+                console.log(result);
+                console.log(request);
+            });
         }
     }
-//repo.getContents('master', 'hello.txt', false, function(error, result, request){console.log(atob(result.content));});
 
     function newPage() {
         var activeEditor = tinyMCE.get('ocr-text');
