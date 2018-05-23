@@ -47,6 +47,8 @@ body, html {
 <script src="https://unpkg.com/github-api/dist/GitHub.bundle.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 <script>
+    var githubHack = "Dear github API, please don't interpret this file as html\n"
+
     OAuth.initialize('VnRodo6ycABEgsuWx0LF7BBgO-I');
     var provider = 'github';
     var repo = null;
@@ -75,7 +77,7 @@ body, html {
         if (repo) {
             var page = $('#page').val();
             var content = tinyMCE.activeEditor.getContent({ format: "raw" });
-            repo.writeFile('master', 'htmls/' + page + '.txt', content, 'Save via editor interface', {}, function(error, result, request){
+            repo.writeFile('master', 'htmls/' + page + '.txt', githubHack + content, 'Save via editor interface', {}, function(error, result, request){
                 console.log('done with the commit');
                 console.log(error);
                 console.log(result);
@@ -90,7 +92,7 @@ body, html {
         repo.getContents('master', 'htmls/' + page + '.txt', true, function(error, result, request){
             var content = (result) || 'no content';
             var activeEditor = tinyMCE.activeEditor;
-            activeEditor.setContent(content);
+            activeEditor.setContent(content.split(githubHack)[1]);
         });
     }
 
