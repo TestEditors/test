@@ -1,2 +1,2 @@
-Dear github API, please don't interpret this file as html
+<<<this is not valid html
 <span></span>

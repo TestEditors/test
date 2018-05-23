@@ -1,2 +1,2 @@
-Dear github API, please don't interpret this file as html
+<<<this is not valid html
 <span>EGYPT AS A WINTER <span style="color: #ff0000;">RESORT<br/><br/><br/><br/><br/><br/></span></span>
