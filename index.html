@@ -74,7 +74,7 @@ body, html {
     function saveme() {
         if (repo) {
             var page = $('#page').val();
-            var content = htmlEncode(tinyMCE.activeEditor.getContent({ format: "raw" }));
+            var content = (tinyMCE.activeEditor.getContent({ format: "raw" }));
             repo.writeFile('master', 'htmls/' + page + '.txt', content, 'Save via editor interface', {}, function(error, result, request){
                 console.log('done with the commit');
                 console.log(error);
@@ -90,7 +90,7 @@ body, html {
         repo.getContents('master', 'htmls/' + page + '.txt', false, function(error, result, request){
             var content = result.content || 'no content';
             var activeEditor = tinyMCE.activeEditor;
-            activeEditor.setContent(htmlDecode(atob(content)));
+            activeEditor.setContent((atob(content)));
         });
     }
 
