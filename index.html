@@ -90,7 +90,7 @@ body, html {
         repo.getContents('master', 'htmls/' + page + '.txt', true, function(error, result, request){
             var content = (result) || 'no content';
             var activeEditor = tinyMCE.activeEditor;
-            activeEditor.setContent(htmlDecode(content));
+            activeEditor.setContent(htmlDecode(atob(content)));
         });
     }
 
