@@ -44,7 +44,7 @@ body, html {
 <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/oauth-io/0.6.2/oauth.min.js'></script>
-<script src="https://unpkg.com/github-api/dist/GitHub.bundle.min.js"></script>
+<script src="GitHub.bundle.js"></script>
 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 <script>
     OAuth.initialize('VnRodo6ycABEgsuWx0LF7BBgO-I');
@@ -87,7 +87,7 @@ body, html {
     function newPage() {
         var page = $('#page').val();
         document.getElementById('book-image').src = ('pngs/' + page + '.png');
-        repo.getContents('master', 'htmls/' + page + '.txt', true, function(error, result, request){
+        repo.getContents('master', 'htmls/' + page + '.txt', false, function(error, result, request){
             var content = result.content || 'no content';
             var activeEditor = tinyMCE.activeEditor;
             activeEditor.setContent(htmlDecode(atob(content)));
