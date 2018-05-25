@@ -60,7 +60,7 @@ body, html {
         repo = gh.getRepo('tguinard', 'test');
         tinymce.init({ 
             selector:'textarea', 
-            plugins: "autoresize",
+            plugins: "autoresize textcolor",
             init_instance_callback: function() {
                 $('#page').change(newPage);
                 newPage();
