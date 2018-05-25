@@ -63,6 +63,7 @@ body, html {
             plugins: "autoresize textcolor",
             toolbar: "forecolor",
             menubar: false,
+            force_br_newlines : true,
             init_instance_callback: function() {
                 $('#page').change(newPage);
                 newPage();
@@ -113,6 +114,8 @@ body, html {
         <label> Changing the page will reset edits!</label>
         <br/>
         <input onclick='responsiveVoice.speak(tinyMCE.activeEditor.getContent({ format: "text" }));' type='button' value='Read out loud' />
+        <input onclick='responsiveVoice.cancel();' type='button' value='Stop' />
+        <br/>
         <input onclick='saveme()' id='save' type='button' value='Save' />
         <textarea class='my-mce-container' id='ocr-text'>
         </textarea>
