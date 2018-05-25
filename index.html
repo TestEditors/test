@@ -61,6 +61,7 @@ body, html {
         tinymce.init({ 
             selector:'textarea', 
             plugins: "autoresize textcolor",
+            toolbar: "forecolor backcolor",
             init_instance_callback: function() {
                 $('#page').change(newPage);
                 newPage();
