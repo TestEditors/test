@@ -80,16 +80,15 @@ body, html {
         if (repo) {
             var page = $('#page').val();
             var content = (tinyMCE.activeEditor.getContent({ format: "raw" }));
-            repo.writeFile('master', 'htmls/' + page + '.txt', content, 'Save via editor interface', {}, function(error, result, request){
+            repo.writeFile("master", "htmls/" + page + ".txt", content, "Save via editor interface", {}, function(error, result, request){
                 if (!error) {
-                    bootstrapSuccess('Successfully saved page ' + page);
+                    bootstrapSuccess("Successfully saved page " + page);
                 }
                 else {
-                    console.log(error);
+                    bootstrapError("Could not save: " + error);
                 }
             }).catch(function(error) {
-                console.log("here");
-                console.log(error);
+                bootstrapError("Could not save: " + error);
             });
         }
     }
