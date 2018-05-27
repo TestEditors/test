@@ -39,12 +39,12 @@ body, html {
   height:100%;
 }
 </style>
-<script src="tinymce/js/tinymce/tinymce.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script src="tinymce/js/tinymce/tinymce.min.js"></script>
+<script src='https://code.responsivevoice.org/responsivevoice.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/oauth-io/0.6.2/oauth.min.js'></script>
 <script src="GitHub.bundle.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 <script>
     OAuth.initialize('VnRodo6ycABEgsuWx0LF7BBgO-I');
@@ -81,10 +81,8 @@ body, html {
             var page = $('#page').val();
             var content = (tinyMCE.activeEditor.getContent({ format: "raw" }));
             repo.writeFile('master', 'htmls/' + page + '.txt', content, 'Save via editor interface', {}, function(error, result, request){
-                console.log('done with the commit');
-                console.log(error);
-                console.log(result);
-                console.log(request);
+                $('#success-message').text('saved');
+                $('#success-message').show();
             });
         }
     }
@@ -99,27 +97,30 @@ body, html {
         });
     }
 
-    function htmlEncode(value){
-        return $('<div/>').text(value).html();
-    }
-
-    function htmlDecode(value){
-        return $('<div/>').html(value).text();
-    }
-
 </script>
 <body>
     <div class="row">
     <div class="col-md-6" style="heigh:100%" id='left'>
-        <label>Page </label>
-        <input type="number" id="page" min="1" max="176" step="1" value="1">
-        <label> Changing the page will reset edits!</label>
-        <br/>
-        <input onclick='responsiveVoice.speak(tinyMCE.activeEditor.getContent({ format: "text" }));' type='button' value='Read out loud' />
-        <input onclick='responsiveVoice.cancel();' type='button' value='Stop' />
-        <br/>
-        <input onclick='saveme()' id='save' type='button' value='Save' />
-        <textarea class='my-mce-container' id='ocr-text'>
+        <div class="row col-md-12">
+            <div id="error-message" class='alert alert-danger collapse alert-dismissible'></div>
+        </div>
+        <div class="row col-md-12">
+            <div id="success-message" class='alert alert-success collapse alert-dismissible'></div>
+        </div>
+        <div class="row col-md-12">
+            <label>Page </label>
+            <input type="number" id="page" min="1" max="176" step="1" value="1">
+            <label> Changing the page will reset unsaved edits!</label>
+        </div>
+        <div class="row col-md-12">
+            <input onclick='responsiveVoice.speak(tinyMCE.activeEditor.getContent({ format: "text" }));' type='button' value='Read out loud' />
+            <input onclick='responsiveVoice.cancel();' type='button' value='Stop' />
+        </div>
+        <div class="row col-md-12">
+            <input onclick='saveme()' id='save' type='button' value='Save' />
+        </div>
+        <div class='row'><img src="loading.gif" id='loading' hidden></div>
+        <textarea id='ocr-text'>
         </textarea>
     </div>
     <div class="col-md-6" id='right'>
