@@ -126,17 +126,19 @@ body, html {
     <div class="row">
     <div class="col-md-6" style="heigh:100%" id='left'>
         <div id="alert_placeholder"></div>
-        <div class="row col-md-12">
-            <label>Page </label>
-            <input type="number" id="page" min="1" max="176" step="1" value="1">
-            <label> Changing the page will reset unsaved edits!</label>
+        <div class="row-fluid input-group">
+            <p>Page&nbsp;</p>
+            <input type="number" id="page" min="1" max="176" step="1" value="1" class="form-control bfh-number">
+            <label>&nbsp;Changing the page will reset unsaved edits!</label>
         </div>
-        <div class="row col-md-12">
-            <input onclick='responsiveVoice.speak(tinyMCE.activeEditor.getContent({ format: "text" }));' type='button' value='Read out loud' />
-            <input onclick='responsiveVoice.cancel();' type='button' value='Stop' />
-        </div>
-        <div class="row col-md-12">
-            <input onclick='saveme()' id='save' type='button' value='Save' />
+        <div class="row">
+            <div class='pull-left col-md-6'>
+                <input onclick='responsiveVoice.speak(tinyMCE.activeEditor.getContent({ format: "text" }));' type='button' value='Read out loud' class='btn btn-info' />
+                <input onclick='responsiveVoice.cancel();' type='button' value='Stop' class='btn btn-danger' />
+            </div>
+            <div class='pull-right col-md-6' style="text-align:right">
+                <input onclick='saveme()' id='save' type='button' value='Save' class='btn btn-success'/>
+            </div>
         </div>
         <div class='row'><img src="loading.gif" id='loading' hidden></div>
         <textarea id='ocr-text'>
