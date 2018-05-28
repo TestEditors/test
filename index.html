@@ -54,7 +54,6 @@ body, html {
 
     OAuth.popup(provider)
     .done(function(result) {
-        console.log(result.access_token);
         var gh = new GitHub({
             token: result.access_token
         });
@@ -91,7 +90,6 @@ body, html {
             }).then(function(){
                 //also export as text
                 var textcontent = (tinyMCE.activeEditor.getContent({ format: "text" }));
-                console.log(textcontent);
                 repo.writeFile("master", "txts/" + page + ".txt", textcontent, "Save via editor interface", {}, function(error, result, request){
                     if (!error) {
                         bootstrapSuccess("Successfully saved page " + page);
@@ -110,7 +108,6 @@ body, html {
         var page = $('#page').val();
         document.getElementById('book-image').src = ('pngs/' + page + '.png');
         repo.getContents('master', 'htmls/' + page + '.html', false, function(error, result, request){
-            console.log(result);
             var content = result.content || 'no content';
             var activeEditor = tinyMCE.activeEditor;
             activeEditor.setContent((b64DecodeUnicode(content)));
