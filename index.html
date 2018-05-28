@@ -113,7 +113,7 @@ body, html {
             console.log(result);
             var content = result.content || 'no content';
             var activeEditor = tinyMCE.activeEditor;
-            activeEditor.setContent((atob(content)));
+            activeEditor.setContent((b64DecodeUnicode(content)));
         });
     }
 
@@ -134,7 +134,11 @@ body, html {
         }, 3000);
     }
 
-
+    function b64DecodeUnicode(str) {
+        return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        }).join(''))
+    }
 </script>
 <body>
     <div class="row">
