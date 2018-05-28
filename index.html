@@ -111,7 +111,7 @@ body, html {
             var activeEditor = tinyMCE.activeEditor;
             activeEditor.setContent((atob(content)));
         });
-        repo.getContents('master', 'htmls/' + page + '.txt', false, function(error, result, request){
+        repo.getContents('master', 'txts/' + page + '.txt', false, function(error, result, request){
         });
     }
 
