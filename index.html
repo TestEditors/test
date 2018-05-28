@@ -90,16 +90,16 @@ body, html {
                 }
             }).catch(function(error) {
                 bootstrapError("Could not save: " + error);
-            });
-
-            var textcontent = (tinyMCE.activeEditor.getContent({ format: "text" }));
-            console.log(textcontent);
-            repo.writeFile("master", "txts/" + page + ".txt", textcontent, "Save via editor interface", {}, function(error, result, request){
-                if (error) {
+            }).then(function(){
+                var textcontent = (tinyMCE.activeEditor.getContent({ format: "text" }));
+                console.log(textcontent);
+                repo.writeFile("master", "txts/" + page + ".txt", textcontent, "Save via editor interface", {}, function(error, result, request){
+                    if (error) {
+                        bootstrapError("Could not save as text: " + error);
+                    }
+                }).catch(function(error) {
                     bootstrapError("Could not save as text: " + error);
-                }
-            }).catch(function(error) {
-                bootstrapError("Could not save as text: " + error);
+                })
             });
         }
     }
