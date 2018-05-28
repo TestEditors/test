@@ -80,21 +80,22 @@ body, html {
         if (repo) {
             var page = $('#page').val();
             var content = (tinyMCE.activeEditor.getContent({ format: "raw" }));
-            content = content.replace(/<br\/?>/g, '\n<br/>\n');
+            content = content.replace(/<br\/?>/g, '<br/>\n');
             repo.writeFile("master", "htmls/" + page + ".html", content, "Save via editor interface", {}, function(error, result, request){
-                if (!error) {
-                    bootstrapSuccess("Successfully saved page " + page);
-                }
-                else {
+                if (error) {
                     bootstrapError("Could not save: " + error);
                 }
             }).catch(function(error) {
                 bootstrapError("Could not save: " + error);
             }).then(function(){
+                //also export as text
                 var textcontent = (tinyMCE.activeEditor.getContent({ format: "text" }));
                 console.log(textcontent);
                 repo.writeFile("master", "txts/" + page + ".txt", textcontent, "Save via editor interface", {}, function(error, result, request){
-                    if (error) {
+                    if (!error) {
+                        bootstrapSuccess("Successfully saved page " + page);
+                    }
+                    else {
                         bootstrapError("Could not save as text: " + error);
                     }
                 }).catch(function(error) {
@@ -111,8 +112,6 @@ body, html {
             var content = result.content || 'no content';
             var activeEditor = tinyMCE.activeEditor;
             activeEditor.setContent((atob(content)));
-        });
-        repo.getContents('master', 'txts/' + page + '.txt', false, function(error, result, request){
         });
     }
 
