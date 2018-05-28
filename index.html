@@ -91,6 +91,15 @@ body, html {
             }).catch(function(error) {
                 bootstrapError("Could not save: " + error);
             });
+
+            var textcontent = (tinyMCE.activeEditor.getContent({ format: "text" }));
+            repo.writeFile("master", "txts/" + page + ".txt", content, "Save via editor interface", {}, function(error, result, request){
+                if (error) {
+                    bootstrapError("Could not save as text: " + error);
+                }
+            }).catch(function(error) {
+                bootstrapError("Could not save as text: " + error);
+            });
         }
     }
 
@@ -101,6 +110,8 @@ body, html {
             var content = result.content || 'no content';
             var activeEditor = tinyMCE.activeEditor;
             activeEditor.setContent((atob(content)));
+        });
+        repo.getContents('master', 'htmls/' + page + '.txt', false, function(error, result, request){
         });
     }
 
