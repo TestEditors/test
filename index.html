@@ -110,6 +110,7 @@ body, html {
         var page = $('#page').val();
         document.getElementById('book-image').src = ('pngs/' + page + '.png');
         repo.getContents('master', 'htmls/' + page + '.html', false, function(error, result, request){
+            console.log(result);
             var content = result.content || 'no content';
             var activeEditor = tinyMCE.activeEditor;
             activeEditor.setContent((atob(content)));
