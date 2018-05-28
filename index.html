@@ -93,7 +93,8 @@ body, html {
             });
 
             var textcontent = (tinyMCE.activeEditor.getContent({ format: "text" }));
-            repo.writeFile("master", "txts/" + page + ".txt", content, "Save via editor interface", {}, function(error, result, request){
+            console.log(textcontent);
+            repo.writeFile("master", "txts/" + page + ".txt", textcontent, "Save via editor interface", {}, function(error, result, request){
                 if (error) {
                     bootstrapError("Could not save as text: " + error);
                 }
