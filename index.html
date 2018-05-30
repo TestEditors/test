@@ -107,6 +107,7 @@ body, html {
 
     function newPage() {
         var page = $('#page').val();
+        var book = $('#book').val();
         document.getElementById('book-image').src = (book + '/pngs/' + page + '.png');
         repo.getContents('master', book + '/htmls/' + page + '.html', false, function(error, result, request){
             var content = result.content || 'no content';
