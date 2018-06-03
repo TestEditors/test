@@ -54,6 +54,7 @@ body, html {
 
     OAuth.popup(provider)
     .done(function(result) {
+        console.log(result);
         var gh = new GitHub({
             token: result.access_token
         });
