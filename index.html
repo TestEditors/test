@@ -68,6 +68,7 @@ body, html {
             forced_root_block : '',
             init_instance_callback: function() {
                 $('#page').change(newPage);
+                $('#book').change(newPage);
                 newPage();
             }
         });
@@ -165,7 +166,6 @@ body, html {
                 <input onclick='saveme()' id='save' type='button' value='Save' class='btn btn-success'/>
             </div>
         </div>
-        <div class='row'><img src="loading.gif" id='loading' hidden></div>
         <textarea id='ocr-text'>
         </textarea>
     </div>
